@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
 
 const Guestbook = () => {
-    const [entries, setEntries] = useState([
-        { name: 'Ghost Rider Fan', comment: 'This portfolio is on fire! 🔥', public: true, liked: false, date: '2023-10-27' },
-        { name: 'Web Dev Recruiter', comment: 'Impressive design skills. Keep it up!', public: true, liked: true, date: '2023-10-28' }
-    ]);
-
+    const [entries, setEntries] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
         comment: '',
         isPublic: false
     });
+    const [loading, setLoading] = useState(true);
+
+    // Fetch messages in real-time
+    useEffect(() => {
+        const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const messages = [];
+            querySnapshot.forEach((doc) => {
+                messages.push({ id: doc.id, ...doc.data() });
+            });
+            setEntries(messages);
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -20,26 +34,23 @@ const Guestbook = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.name.trim() || !formData.comment.trim()) return;
 
-        const newEntry = {
-            name: formData.name,
-            comment: formData.comment,
-            public: formData.isPublic,
-            liked: false,
-            date: new Date().toISOString().split('T')[0]
-        };
+        try {
+            await addDoc(collection(db, "messages"), {
+                name: formData.name,
+                comment: formData.comment,
+                public: formData.isPublic,
+                createdAt: serverTimestamp()
+            });
 
-        setEntries([newEntry, ...entries]);
-        setFormData({ name: '', comment: '', isPublic: false });
-    };
-
-    const toggleLike = (index) => {
-        const newEntries = [...entries];
-        newEntries[index].liked = !newEntries[index].liked;
-        setEntries(newEntries);
+            setFormData({ name: '', comment: '', isPublic: false });
+        } catch (error) {
+            console.error("Error adding message: ", error);
+            alert("Nagkaroon ng error sa pag-send ng message. Siguraduhin na tama ang iyong Firebase config.");
+        }
     };
 
     return (
@@ -47,7 +58,7 @@ const Guestbook = () => {
             <div className="guestbook-container">
                 <h2>Get In <span className="accent">Touch</span></h2>
                 <p style={{ textAlign: 'center', marginBottom: '2rem' }}>Leave your feedback and connect with me!</p>
-                <form className="guestbook-form" onSubmit={handleSubmit}>
+                <form className="contact-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <input
                             type="text"
@@ -67,30 +78,37 @@ const Guestbook = () => {
                             required
                         ></textarea>
                     </div>
-                    <div className="form-group checkbox-group">
-                        <label>
+                    <div className="form-group checkbox">
+                        <label className="checkbox-label">
                             <input
                                 type="checkbox"
                                 name="isPublic"
                                 checked={formData.isPublic}
                                 onChange={handleInputChange}
                             />
-                            Make this public
+                            <span>Make this public</span>
                         </label>
                     </div>
                     <button type="submit" className="btn-primary">Send Message</button>
                 </form>
+
+
                 <div className="comments-wrapper">
                     <h3>Recent Messages</h3>
-                    {entries.map((entry, idx) => (
-                        <div key={idx} className="comment-card">
-                            <div className="comment-header">
-                                <h3>{entry.name}</h3>
+                    {loading ? (
+                        <p style={{ textAlign: 'center' }}>Loading messages...</p>
+                    ) : entries.length === 0 ? (
+                        <p style={{ textAlign: 'center' }}>No messages yet. Be the first one!</p>
+                    ) : (
+                        entries.map((entry) => (
+                            <div key={entry.id} className="comment-card">
+                                <div className="comment-header">
+                                    <h3>{entry.name}</h3>
+                                </div>
+                                <p>{entry.comment}</p>
                             </div>
-                            <p>{entry.comment}</p>
-                            {/* Removed date/like for cleaner look matching screenshot if needed, or keeping it */}
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
             </div>
         </section>
@@ -98,3 +116,4 @@ const Guestbook = () => {
 };
 
 export default Guestbook;
+
