@@ -11,11 +11,8 @@ const Navbar = ({ toggleTheme, isLightMode }) => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="fas fa-skull" style={{ color: 'var(--primary)', fontSize: '1.8rem', filter: 'drop-shadow(0 0 10px var(--primary))' }}></i>
-          <span style={{ fontFamily: 'var(--font-heading)', letterSpacing: '2px', textTransform: 'uppercase' }}>
-            Ghost <span className="accent">Rider</span>
-          </span>
+        <div className="nav-logo">
+          Anthony's <span className="accent">Personal Website</span>
         </div>
         <div className="nav-links">
           <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>Home</a>
