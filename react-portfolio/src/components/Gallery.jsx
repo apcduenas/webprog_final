@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FlameText from './FlameText';
 
 const Gallery = () => {
     const images = [
@@ -34,7 +35,7 @@ const Gallery = () => {
     return (
         <section id="gallery" className="gallery">
             <div className="gallery-container">
-                <h2>Photo <span className="accent">Gallery</span></h2>
+                <h2><FlameText text="Photo Gallery" /></h2>
                 <div className="gallery-grid">
                     {images.map((img, idx) => (
                         <div className="thumb" key={idx}>

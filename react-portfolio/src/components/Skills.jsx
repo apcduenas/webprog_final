@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FlameText from './FlameText';
 
 const Skills = () => {
     const [filter, setFilter] = useState('all');
@@ -19,7 +20,7 @@ const Skills = () => {
     return (
         <section id="skills" className="skills">
             <div className="skills-container">
-                <h2><span className="accent">Experience</span></h2>
+                <h2><FlameText text="Experience" /></h2>
                 <div className="skills-filter">
                     {['all', 'frontend', 'backend', 'tools'].map(cat => (
                         <button

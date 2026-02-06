@@ -1,12 +1,14 @@
-import React from 'react';
+import FlameText from './FlameText';
 
 const About = () => {
     return (
         <section id="about" className="about">
             <div className="about-container">
                 <div className="about-left">
-                    <h2>About <span className="accent">Me</span></h2>
-                    <div className="about-title">Passionate Web Developer & IT Student</div>
+                    <h2><FlameText text="About Me" /></h2>
+                    <div className="about-title">
+                        <FlameText text="Passionate Web Developer & IT Student" ignite={false} />
+                    </div>
                     <p>With keen interest in web development from various learning experiences, I am eager to learn more about modern web technologies, frameworks, and best practices. I am also willing to work and grow with a team.</p>
                     <p>I'm passionate about learning and exploring new technologies that interest me, especially in web development and IT. My goal is to finish my studies and achieve my dreams so I can contribute meaningfully to the tech industry.</p>
                     <a href="#contact-info" className="btn-secondary" onClick={(e) => {

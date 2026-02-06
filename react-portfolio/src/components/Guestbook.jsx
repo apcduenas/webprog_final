@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
+import FlameText from './FlameText';
 
 const Guestbook = () => {
     const [entries, setEntries] = useState([]);
@@ -83,7 +84,7 @@ const Guestbook = () => {
     return (
         <section id="guestbook" className="guestbook">
             <div className="guestbook-container">
-                <h2>Get In <span className="accent">Touch</span></h2>
+                <h2><FlameText text="Get In Touch" /></h2>
                 <p style={{ textAlign: 'center', marginBottom: '2rem' }}>Leave your feedback and connect with me!</p>
                 <form className="contact-form" onSubmit={handleSubmit}>
                     <div className="form-group">

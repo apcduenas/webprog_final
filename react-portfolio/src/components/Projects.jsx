@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
+import FlameText from './FlameText';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -39,7 +40,7 @@ const Projects = () => {
     return (
         <section id="projects" className="projects">
             <div className="projects-container">
-                <h2>My <span className="accent">Projects</span></h2>
+                <h2><FlameText text="My Projects" /></h2>
                 <div className="projects-grid">
                     {loading ? (
                         <p style={{ textAlign: 'center', width: '100%' }}>Loading projects...</p>

@@ -1,4 +1,4 @@
-import React from 'react';
+import FlameText from './FlameText';
 
 const Navbar = ({ toggleTheme, isLightMode }) => {
   const scrollToSection = (id) => {
@@ -17,7 +17,7 @@ const Navbar = ({ toggleTheme, isLightMode }) => {
             alt="Logo"
             style={{ height: '60px', width: 'auto', filter: 'drop-shadow(0 0 10px var(--primary))' }}
           />
-          <span>Anthony's <span className="accent">Personal Website</span></span>
+          <FlameText text="Anthony's Personal Website" />
         </div>
         <div className="nav-links">
           <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>Home</a>

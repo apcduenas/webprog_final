@@ -1,11 +1,11 @@
-
 import React from 'react';
+import FlameText from './FlameText';
 
 const ContactInfo = () => {
     return (
         <section id="contact-info" className="get-in-touch">
             <div className="contact-info-container">
-                <h2><span className="accent">Information</span></h2>
+                <h2><FlameText text="Information" /></h2>
                 <div className="contact-info-grid">
                     <div className="info-card">
                         <div className="info-icon">
