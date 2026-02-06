@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase';
-import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { supabase } from '../supabase';
 
 const Guestbook = () => {
     const [entries, setEntries] = useState([]);
@@ -10,21 +9,39 @@ const Guestbook = () => {
         isPublic: false
     });
     const [loading, setLoading] = useState(true);
+    const [sending, setSending] = useState(false);
 
-    // Fetch messages in real-time
+    // Fetch messages
     useEffect(() => {
-        const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const messages = [];
-            querySnapshot.forEach((doc) => {
-                messages.push({ id: doc.id, ...doc.data() });
-            });
-            setEntries(messages);
-            setLoading(false);
-        });
+        fetchMessages();
 
-        return () => unsubscribe();
+        // Real-time subscription
+        const subscription = supabase
+            .channel('public:messages')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
+                setEntries(prev => [payload.new, ...prev]);
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(subscription);
+        };
     }, []);
+
+    const fetchMessages = async () => {
+        setLoading(true);
+        const { data, error } = await supabase
+            .from('messages')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error fetching messages:', error);
+        } else {
+            setEntries(data || []);
+        }
+        setLoading(false);
+    };
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -38,18 +55,28 @@ const Guestbook = () => {
         e.preventDefault();
         if (!formData.name.trim() || !formData.comment.trim()) return;
 
+        setSending(true);
+
         try {
-            await addDoc(collection(db, "messages"), {
-                name: formData.name,
-                comment: formData.comment,
-                public: formData.isPublic,
-                createdAt: serverTimestamp()
-            });
+            const { error } = await supabase
+                .from('messages')
+                .insert([
+                    {
+                        name: formData.name,
+                        comment: formData.comment,
+                        public: formData.isPublic
+                    }
+                ]);
+
+            if (error) throw error;
 
             setFormData({ name: '', comment: '', isPublic: false });
+            alert("Message sent successfully!");
         } catch (error) {
             console.error("Error adding message: ", error);
-            alert("Nagkaroon ng error sa pag-send ng message. Siguraduhin na tama ang iyong Firebase config.");
+            alert("Mali ang configuration! Siguraduhin na nailagay mo ang tamang Supabase URL at Key sa src/supabase.js");
+        } finally {
+            setSending(false);
         }
     };
 
@@ -91,9 +118,10 @@ const Guestbook = () => {
                             Make this public
                         </label>
                     </div>
-                    <button type="submit" className="btn-primary">Send Message</button>
+                    <button type="submit" className="btn-primary" disabled={sending}>
+                        {sending ? 'Sending...' : 'Send Message'}
+                    </button>
                 </form>
-
 
                 <div className="comments-wrapper">
                     <h3>Recent Messages</h3>
@@ -118,4 +146,3 @@ const Guestbook = () => {
 };
 
 export default Guestbook;
-
