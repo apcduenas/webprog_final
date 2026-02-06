@@ -5,11 +5,13 @@ const Skills = () => {
     const [filter, setFilter] = useState('all');
 
     const skills = [
-        { name: 'JavaScript', category: 'frontend', icon: 'devicon-javascript-plain', color: '#F7DF1E' },
+        { name: 'HTML', category: 'frontend', icon: 'devicon-html5-plain', color: '#E34F26' },
+        { name: 'CSS', category: 'frontend', icon: 'devicon-css3-plain', color: '#1572B6' },
+        { name: 'JavaScript', category: 'backend', icon: 'devicon-javascript-plain', color: '#F7DF1E' },
+        { name: 'Vue.js', category: 'backend', icon: 'devicon-vuejs-plain', color: '#4FC08D' },
+        { name: 'MySQL', category: 'backend', icon: 'devicon-mysql-plain', color: '#4479A1' },
         { name: 'GitHub', category: 'tools', icon: 'devicon-github-original', color: '#ffffff' },
         { name: 'VS Code', category: 'tools', icon: 'devicon-vscode-plain', color: '#007ACC' },
-        { name: 'MySQL', category: 'backend', icon: 'devicon-mysql-plain', color: '#4479A1' },
-        { name: 'Vue.js', category: 'frontend', icon: 'devicon-vuejs-plain', color: '#4FC08D' },
         { name: 'Figma', category: 'tools', icon: 'devicon-figma-plain', color: '#F24E1E' }
     ];
 
