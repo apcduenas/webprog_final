@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personal Portfolio | ANTHONY DUENAS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts for Ghost Rider Theme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Rubik+Burned&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Devicon for Programming Language Logos -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- SVG Filters for Burned Paper Effect -->
+  <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+    <!-- Filter: Charred/Burnt Edge Distortion -->
+    <filter id="charred-edge">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <!-- Filter: Heat Haze Distortion -->
+    <filter id="heat-distortion">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.08" numOctaves="3" result="noise">
+        <animate attributeName="baseFrequency" values="0.02 0.08; 0.02 0.12; 0.02 0.08" dur="2s" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" />
+    </filter>
+  </svg>
+
+  <!-- Fire Cursor Canvas -->
+  <canvas id="fireCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+  
+  <div id="ghostRiderContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9998; background-color: black; display: flex;">
+    <video id="ghostRiderVid" style="width: 100%; height: 100%; object-fit: cover;" muted playsinline></video>
+  </div>
+
+  <div id="app">
+    <!-- TOP NAVIGATION -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">Anthony's <span class="accent">Personal Website</span></div>
+        <div class="nav-links">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact-info" class="nav-link">Contact</a>
+          <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Hi, I'm <span class="highlight-text">Anthony Duenas</span></h1>
+        <p>A second-year Information Technology student at Asia Pacific College. I'm passionate about web development and continuously improving my technical skills.</p>
+        <a href="#projects" class="btn-primary">View My Works</a>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+      <div class="about-container">
+        <div class="about-left">
+          <h2>About <span class="accent">Me</span></h2>
+          <div class="about-title">Passionate Web Developer & IT Student</div>
+          <p>With keen interest in web development from various learning experiences, I am eager to learn more about modern web technologies, frameworks, and best practices. I am also willing to work and grow with a team.</p>
+          <p>I'm passionate about learning and exploring new technologies that interest me, especially in web development and IT. My goal is to finish my studies and achieve my dreams so I can contribute meaningfully to the tech industry.</p>
+          <a href="#contact-info" class="btn-secondary">Information</a>
+        </div>
+        <div class="about-right">
+          <div class="expertise-list">
+            <div class="expertise-item">
+              <i class="expertise-icon fas fa-code"></i>
+              <h3>Web Development</h3>
+              <p>Creating responsive websites and web applications with modern frameworks.</p>
+            </div>
+            <div class="expertise-item">
+              <i class="expertise-icon fas fa-laptop-code"></i>
+              <h3>Computer Programming</h3>
+              <p>Proficient in multiple languages and eager to master new frameworks.</p>
+            </div>
+            <div class="expertise-item">
+              <i class="expertise-icon fas fa-graduation-cap"></i>
+              <h3>Continuous Learning</h3>
+              <p>Always exploring new technologies and best practices in IT.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills">
+      <div class="skills-container">
+        <h2>My <span class="accent">Skills</span></h2>
+        
+        <div class="skills-filter">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="frontend">Frontend</button>
+          <button class="filter-btn" data-filter="backend">Backend</button>
+          <button class="filter-btn" data-filter="frameworks">Frameworks</button>
+          <button class="filter-btn" data-filter="tools">Tools</button>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Frontend -->
+          <div class="skill-card" data-category="frontend all">
+            <i class="skill-icon devicon-html5-plain colored"></i>
+            <h4>HTML</h4>
+          </div>
+          <div class="skill-card" data-category="frontend all">
+            <i class="skill-icon devicon-css3-plain colored"></i>
+            <h4>CSS</h4>
+          </div>
+          <div class="skill-card" data-category="frontend all">
+            <i class="skill-icon devicon-javascript-plain colored"></i>
+            <h4>JavaScript</h4>
+          </div>
+
+          <!-- Frameworks -->
+          <div class="skill-card" data-category="frameworks all">
+            <i class="skill-icon devicon-vuejs-plain colored"></i>
+            <h4>Vue.js</h4>
+          </div>
+          <div class="skill-card" data-category="frameworks all">
+            <i class="skill-icon devicon-react-original colored"></i>
+            <h4>React</h4>
+          </div>
+          <div class="skill-card" data-category="frameworks all">
+            <i class="skill-icon devicon-tailwindcss-plain colored"></i>
+            <h4>Tailwind CSS</h4>
+          </div>
+
+          <!-- Backend -->
+          <div class="skill-card" data-category="backend all">
+            <i class="skill-icon devicon-python-plain colored"></i>
+            <h4>Python</h4>
+          </div>
+          <div class="skill-card" data-category="backend all">
+            <i class="skill-icon devicon-java-plain colored"></i>
+            <h4>Java</h4>
+          </div>
+          <div class="skill-card" data-category="backend all">
+            <i class="skill-icon fas fa-database"></i>
+            <h4>SQL</h4>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-card" data-category="tools all">
+            <i class="skill-icon devicon-sqlite-plain colored"></i>
+            <h4>SQLite</h4>
+          </div>
+          <div class="skill-card" data-category="tools all">
+            <i class="skill-icon devicon-git-plain colored"></i>
+            <h4>Git</h4>
+          </div>
+          <div class="skill-card" data-category="tools all">
+            <i class="skill-icon devicon-github-original"></i>
+            <h4>Github</h4>
+          </div>
+          <div class="skill-card" data-category="tools all">
+            <i class="skill-icon devicon-figma-plain colored"></i>
+            <h4>Figma</h4>
+          </div>
+          <div class="skill-card" data-category="tools all">
+            <i class="skill-icon devicon-vscode-plain colored"></i>
+            <h4>VS Code</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="projects">
+      <div class="projects-container">
+        <h2>Featured <span class="accent">Projects</span></h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <i class="project-image fas fa-images"></i>
+            <h3>Picture Gallery</h3>
+            <p>Interactive image gallery with modal view and navigation.</p>
+          </div>
+          <div class="project-card">
+            <i class="project-image fas fa-book-open"></i>
+            <h3>Guestbook</h3>
+            <p>Visitor feedback system with public/private comments.</p>
+          </div>
+          <div class="project-card">
+            <i class="project-image fas fa-fire"></i>
+            <h3>Personal Portfolio</h3>
+            <p>Responsive portfolio website with dark/light mode.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="gallery">
+      <div class="gallery-container">
+        <h2>Photo <span class="accent">Gallery</span></h2>
+        <div class="gallery-grid">
+          <div class="thumb" v-for="(img, idx) in images" :key="idx">
+            <img :src="img.src" :alt="img.alt" @click="open(idx)">
+          </div>
+        </div>
+
+        <div class="modal" v-if="selected !== null" @click.self="close">
+          <button class="nav prev" @click.stop="prev">◀</button>
+          <img :src="images[selected].src" :alt="images[selected].alt" class="modal-img">
+          <button class="nav next" @click.stop="next">▶</button>
+          <button class="close" @click="close">✕</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GET IN TOUCH / CONTACT INFO SECTION -->
+    <section id="contact-info" class="get-in-touch">
+      <div class="contact-info-container">
+        <h2><i class="fas fa-info-circle"></i> Information</h2>
+        
+        <div class="contact-info-grid">
+          <div class="info-card">
+            <i class="info-icon fas fa-user"></i>
+            <div class="info-content">
+              <h3>Full Name</h3>
+              <p>Anthony Salik Duenas</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="info-icon fas fa-calendar-alt"></i>
+            <div class="info-content">
+              <h3>Date of Birth</h3>
+              <p>March 28, 2006</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="info-icon fas fa-map-marker-alt"></i>
+            <div class="info-content">
+              <h3>Address</h3>
+              <p>Imus, Cavite, Philippines</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="info-icon fas fa-flag"></i>
+            <div class="info-content">
+              <h3>Nationality</h3>
+              <p>Filipino</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="info-icon fas fa-envelope"></i>
+            <div class="info-content">
+              <h3>Email</h3>
+              <p style="font-size: 0.8rem; word-break: break-all;">asduenas@student.apc.edu.ph</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="info-icon fas fa-phone"></i>
+            <div class="info-content">
+              <h3>Phone</h3>
+              <p>09608720768</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUESTBOOK SECTION -->
+    <section id="contact" class="guestbook">
+      <div class="guestbook-container">
+        <h2>Get In <span class="accent">Touch</span></h2>
+        <p>Leave your feedback and connect with me!</p>
+
+        <form v-on:submit.prevent="addEntry" class="contact-form">
+          <div class="form-group">
+            <input type="text" required placeholder="Your Name" v-model="visitorName">
+          </div>
+          <div class="form-group">
+            <textarea required placeholder="Your Message..." v-model="visitorComment"></textarea>
+          </div>
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" v-model="isPublic">
+              Make this public
+            </label>
+          </div>
+          <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+
+        <div class="comments-wrapper" v-if="guestbookEntries.length > 0">
+          <h3>Recent Messages</h3>
+          <div class="comments-grid">
+            <div v-for="entry in guestbookEntries" 
+                 :key="entry.name"
+                 class="comment-card"
+                 :class="{ public: entry.public, liked: entry.liked }"
+                 @click="entry.liked=!entry.liked">
+              <div class="comment-header">
+                <strong>{{ entry.name }}</strong>
+                <span v-if="entry.liked" class="like-badge">❤️</span>
+              </div>
+              <p>{{ entry.comment }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>© 2026 ANTHONY DUENAS | WEBPROG IT-241</p>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="js/vue.js"></script>
+</body>
+</html>

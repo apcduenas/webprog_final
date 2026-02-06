@@ -1,0 +1,2266 @@
+/* ROOT VARIABLES - DARK THEME (Ghost Rider) */
+:root {
+  --primary: #ff4500;
+  --primary-dark: #b22222;
+  --accent: #ffd700;
+  --text-dark: #f3f4f6;
+  --text-light: #d1d5db;
+  --bg-light: #1f2937;
+  --bg-white: #111827;
+  --border: #374151;
+  --text-white: #ffffff;
+  --secondary: #ffd700;
+  --fire-yellow: #ffd700;
+
+  /* Ghost Rider Font Stack */
+  --font-heading: 'Metal Mania', cursive;
+  --font-label: 'Rubik Burned', cursive;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+/* LIGHT MODE VARIABLES */
+html.light-mode {
+  --primary: #0066cc;
+  --primary-dark: #004499;
+  --accent: #ff6b35;
+  --text-dark: #1a1a1a;
+  --text-light: #4a4a4a;
+  --bg-light: #f0f0f0;
+  --bg-white: #ffffff;
+  --border: #e0e0e0;
+  --text-white: #1a1a1a;
+  --secondary: #ff6b35;
+  --fire-yellow: #ff6b35;
+
+  /* Keep same fonts in light mode */
+  --font-heading: 'Metal Mania', cursive;
+  --font-label: 'Rubik Burned', cursive;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-body);
+}
+
+body {
+  background: url('/images/GhostRider.jpg') center center/cover no-repeat fixed;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+html.light-mode body {
+  background: url('/images/Lighty.jpg') center center/cover no-repeat fixed;
+  color: var(--text-dark);
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+}
+
+.nav-logo .accent {
+  color: var(--primary);
+}
+
+html.light-mode .nav-logo .accent {
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+  padding-left: 5%;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at top left, rgba(255, 69, 0, 0.1), transparent);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  font-family: var(--font-heading);
+  color: #fff5f5;
+  text-shadow: 0 0 20px rgba(255, 69, 0, 0.8), 0 0 40px rgba(178, 34, 34, 0.5), 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.highlight-text {
+  color: #ff4500;
+  background: linear-gradient(135deg, #ff4500, #ff6347, #b22222);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  display: inline-block;
+  filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.8)) drop-shadow(0 0 40px rgba(178, 34, 34, 0.6));
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #f3f4f6;
+  text-shadow: 0 0 15px rgba(255, 69, 0, 0.6), 0 0 30px rgba(178, 34, 34, 0.4), 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #ff4500, #b22222);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(255, 69, 0, 0.4);
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator span {
+  display: block;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+  color: var(--primary);
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+/* ABOUT SECTION */
+.about {
+  padding: 6rem 2rem;
+  background: transparent;
+}
+
+body.dark-mode .about {
+  background: transparent;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(17, 24, 39, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  animation: burnDark 1.5s infinite alternate;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.about .accent {
+  color: var(--primary);
+}
+
+.about-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-label);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.about p {
+  color: #e5e7eb;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.expertise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.expertise-item {
+  padding: 2rem;
+  background: rgba(255, 69, 0, 0.05);
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.expertise-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.15);
+}
+
+.expertise-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.expertise-item:hover .expertise-icon {
+  transform: scale(1.15) rotate(5deg);
+  text-shadow: 0 0 20px var(--primary), 0 0 30px var(--accent);
+  filter: drop-shadow(0 0 15px var(--primary));
+}
+
+.expertise-item h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+}
+
+.expertise-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* SKILLS SECTION */
+.skills {
+  padding: 6rem 2rem;
+  background: transparent;
+}
+
+.skills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(31, 41, 55, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  animation: burnDark 1.5s infinite alternate;
+}
+
+.skills h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+}
+
+.skills-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-white);
+  color: var(--text-light);
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: var(--font-label);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background: var(--bg-white);
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+  border-color: var(--primary);
+}
+
+.skill-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+/* Ghost Rider styling for icons */
+.skill-card:hover .skill-icon {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px var(--primary));
+}
+
+/* Make devicon and font-awesome icons glow on hover */
+.skill-card:hover .devicon,
+.skill-card:hover .fas,
+.skill-card:hover .fab {
+  text-shadow: 0 0 20px var(--primary), 0 0 30px var(--accent);
+}
+
+/* Override devicon colors for dark theme consistency */
+html:not(.light-mode) .skill-card .devicon-github-original {
+  color: var(--text-dark);
+}
+
+html:not(.light-mode) .skill-card:hover .devicon-github-original {
+  color: var(--primary);
+  text-shadow: 0 0 20px var(--primary), 0 0 30px var(--accent);
+}
+
+/* SQL database icon styling */
+.skill-card .fa-database {
+  color: var(--primary);
+}
+
+html.light-mode .skill-card .fa-database {
+  color: var(--primary);
+}
+
+html.light-mode .skill-card .devicon-github-original {
+  color: var(--text-dark);
+}
+
+html.light-mode .skill-card:hover .devicon-github-original {
+  color: var(--primary);
+}
+
+.skill-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+/* PROJECTS SECTION */
+.projects {
+  padding: 6rem 2rem;
+  background: transparent;
+}
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(17, 24, 39, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  animation: burnDark 1.5s infinite alternate;
+}
+
+.projects h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--bg-light);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+}
+
+.project-image {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.2);
+  text-shadow: 0 0 25px var(--primary), 0 0 40px var(--accent);
+  filter: drop-shadow(0 0 20px var(--primary));
+}
+
+/* Special fire icon animation for portfolio */
+.project-card:hover .fa-fire {
+  animation: fireFlicker 0.5s infinite alternate;
+}
+
+@keyframes fireFlicker {
+  0% {
+    transform: scale(1.2);
+    text-shadow: 0 0 25px var(--primary), 0 0 40px var(--accent);
+  }
+
+  100% {
+    transform: scale(1.3);
+    text-shadow: 0 0 35px var(--primary), 0 0 60px var(--accent), 0 0 80px var(--fire-yellow);
+  }
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+}
+
+.project-card p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* GALLERY SECTION */
+.gallery {
+  padding: 6rem 2rem;
+  background: transparent;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(31, 41, 55, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  animation: burnDark 1.5s infinite alternate;
+}
+
+.gallery h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid var(--border);
+}
+
+.thumb img:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.modal img.modal-img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 12px;
+  border: 4px solid var(--primary);
+}
+
+.modal .nav {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.modal .nav:hover {
+  transform: scale(1.2);
+}
+
+.modal .prev {
+  left: 1rem;
+}
+
+.modal .next {
+  right: 1rem;
+}
+
+.modal .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--primary);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal .close:hover {
+  background: var(--primary-dark);
+}
+
+/* GET IN TOUCH / CONTACT INFO SECTION */
+.get-in-touch {
+  padding: 6rem 2rem;
+  background: transparent;
+}
+
+body.dark-mode .get-in-touch {
+  background: transparent;
+}
+
+.contact-info-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(17, 24, 39, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  animation: burnDark 1.5s infinite alternate;
+}
+
+.get-in-touch h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+}
+
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.info-card {
+  background: var(--bg-light);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(255, 69, 0, 0.2);
+}
+
+.info-icon {
+  font-size: 2.5rem;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.info-card:hover .info-icon {
+  transform: scale(1.2) rotate(10deg);
+  text-shadow: 0 0 25px var(--primary), 0 0 40px var(--accent);
+  filter: drop-shadow(0 0 20px var(--primary));
+}
+
+/* Special animations for specific icons */
+.info-card:hover .fa-envelope {
+  animation: bounce 0.6s ease-in-out;
+}
+
+.info-card:hover .fa-phone {
+  animation: ring 0.6s ease-in-out;
+}
+
+.info-card:hover .fa-map-marker-alt {
+  animation: pin-drop 0.6s ease-in-out;
+}
+
+@keyframes ring {
+
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1.2);
+  }
+
+  25% {
+    transform: rotate(15deg) scale(1.2);
+  }
+
+  75% {
+    transform: rotate(-15deg) scale(1.2);
+  }
+}
+
+@keyframes pin-drop {
+  0% {
+    transform: translateY(-10px) scale(1.2);
+  }
+
+  50% {
+    transform: translateY(0px) scale(1.2);
+  }
+
+  100% {
+    transform: translateY(-5px) scale(1.2);
+  }
+}
+
+.info-content h3 {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  font-family: var(--font-label);
+}
+
+.info-content p {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+/* GUESTBOOK SECTION */
+.guestbook {
+  padding: 6rem 2rem;
+  background: transparent;
+}
+
+.guestbook-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(17, 24, 39, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  animation: burnDark 1.5s infinite alternate;
+}
+
+.guestbook h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+}
+
+.guestbook>p {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+}
+
+.contact-form {
+  background: var(--bg-light);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background: var(--bg-white);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.form-group.checkbox label {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.form-group.checkbox input {
+  width: auto;
+  margin: 0;
+}
+
+.comments-wrapper {
+  margin-top: 3rem;
+}
+
+.comments-wrapper h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+}
+
+.comments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.comment-card {
+  background: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.comment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.15);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.comment-card strong {
+  color: var(--text-dark);
+}
+
+.like-badge {
+  font-size: 1.25rem;
+}
+
+.comment-card p {
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.comment-card.public {
+  border-left-color: var(--accent);
+}
+
+/* FOOTER */
+.footer {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+  background: var(--bg-white);
+}
+
+/* =========================================
+   LIGHT MODE (BLUE THEME) - EXPLICIT OVERRIDES
+   ========================================= */
+
+/* GLOBAL & RESET */
+html.light-mode {
+  --primary: #0066cc;
+  --primary-dark: #004499;
+  --accent: #ff6b35;
+  --text-dark: #1a1a1a;
+  --text-light: #4a4a4a;
+  --bg-light: #f3f4f6;
+  --bg-white: #ffffff;
+  --border: #e5e7eb;
+}
+
+html.light-mode body {
+  color: #1a1a1a;
+}
+
+/* NAVBAR */
+html.light-mode .navbar {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 1000;
+}
+
+html.light-mode .nav-logo {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .nav-logo .accent {
+  color: #0066cc !important;
+}
+
+html.light-mode .nav-link {
+  color: #4a4a4a !important;
+}
+
+html.light-mode .nav-link:hover {
+  color: #0066cc !important;
+}
+
+/* HERO SECTION */
+html.light-mode .hero {
+  background: transparent;
+  /* The body background image handles the visual, ensuring transparency here allows it to show */
+  border-bottom: none;
+}
+
+html.light-mode .hero h1 {
+  color: #1a1a1a !important;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light-mode .highlight-text {
+  color: #0066cc !important;
+  background: linear-gradient(135deg, #0066cc, #00bfff, #60a5fa) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 10px rgba(0, 102, 204, 0.4)) !important;
+  text-shadow: none !important;
+}
+
+html.light-mode .hero p {
+  color: #1a1a1a !important;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600;
+}
+
+html.light-mode .btn-primary {
+  background: linear-gradient(135deg, #0066cc, #004499) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+html.light-mode .btn-secondary {
+  border-color: #0066cc !important;
+  color: #0066cc !important;
+}
+
+html.light-mode .scroll-indicator span {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .arrow {
+  color: #0066cc !important;
+}
+
+/* SECTIONS - COMMON CONTAINER STYLES */
+/* We explicitly set white backgrounds for containers to ensure readability against the light image */
+html.light-mode .about-container,
+html.light-mode .skills-container,
+html.light-mode .projects-container,
+html.light-mode .gallery-container,
+html.light-mode .contact-info-container,
+html.light-mode .guestbook-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  animation: none !important;
+  /* Disable the dark 'burning' animation */
+}
+
+/* SECTION TITLES */
+html.light-mode h2 {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
+}
+
+html.light-mode .accent {
+  color: #0066cc !important;
+}
+
+/* ABOUT CONTENT */
+html.light-mode .about-title {
+  color: #0066cc !important;
+}
+
+html.light-mode .about p {
+  color: #4b5563 !important;
+  text-shadow: none !important;
+}
+
+html.light-mode .expertise-item {
+  background: rgba(0, 102, 204, 0.05) !important;
+  border-left-color: #0066cc !important;
+}
+
+html.light-mode .expertise-icon {
+  color: #0066cc !important;
+}
+
+html.light-mode .expertise-item h3 {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .expertise-item p {
+  color: #4b5563 !important;
+}
+
+/* SKILLS CONTENT */
+html.light-mode .filter-btn {
+  background: white;
+  color: #4b5563;
+  border-color: #e5e7eb;
+}
+
+html.light-mode .filter-btn:hover,
+html.light-mode .filter-btn.active {
+  background: #0066cc !important;
+  color: white !important;
+  border-color: #0066cc !important;
+}
+
+html.light-mode .skill-card {
+  background: white !important;
+  border-color: #e5e7eb;
+  color: #1a1a1a;
+}
+
+html.light-mode .skill-card:hover {
+  border-color: #0066cc !important;
+  box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15) !important;
+}
+
+html.light-mode .skill-card h4 {
+  color: #1a1a1a !important;
+}
+
+/* PROJECTS CONTENT */
+html.light-mode .project-card {
+  background: white !important;
+  border-color: #e5e7eb;
+}
+
+html.light-mode .project-card h3 {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .project-card p {
+  color: #4b5563 !important;
+}
+
+html.light-mode .project-image {
+  color: #0066cc !important;
+}
+
+/* CONTACT INFO */
+html.light-mode .info-card {
+  background: white !important;
+  border-color: #0066cc !important;
+}
+
+html.light-mode .info-icon {
+  color: #0066cc !important;
+}
+
+html.light-mode .info-content h3 {
+  color: #6b7280 !important;
+}
+
+html.light-mode .info-content p {
+  color: #1a1a1a !important;
+}
+
+/* GUESTBOOK */
+html.light-mode .guestbook-form input,
+html.light-mode .guestbook-form textarea {
+  background: white !important;
+  border-color: #d1d5db !important;
+  color: #1a1a1a !important;
+}
+
+html.light-mode .guestbook-form input:focus,
+html.light-mode .guestbook-form textarea:focus {
+  border-color: #0066cc !important;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2) !important;
+}
+
+html.light-mode .comment-card {
+  background: white !important;
+  border-color: #e5e7eb !important;
+}
+
+html.light-mode .comment-header h3 {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .comment-date {
+  color: #9ca3af !important;
+}
+
+html.light-mode .comment-card p {
+  color: #4b5563 !important;
+}
+
+html.light-mode .like-btn {
+  color: #6b7280 !important;
+}
+
+html.light-mode .like-btn.liked {
+  color: #ef4444 !important;
+}
+
+/* FOOTER */
+html.light-mode footer {
+  background: #f3f4f6 !important;
+  border-top-color: #e5e7eb !important;
+}
+
+html.light-mode footer p {
+  color: #6b7280 !important;
+}
+
+html.light-mode .filter-btn {
+  background: #f0f0f0;
+  color: var(--text-dark);
+  border: 2px solid var(--primary);
+}
+
+html.light-mode .about {
+  background: transparent;
+  border-color: var(--primary);
+}
+
+html.light-mode .about-container {
+  background: rgba(255, 255, 255, 0.95);
+  animation: burnLight 1.5s infinite alternate;
+}
+
+html.light-mode .about h2 {
+  color: var(--text-dark);
+}
+
+html.light-mode .about p {
+  color: #333;
+}
+
+html.light-mode .skills {
+  background: transparent;
+}
+
+html.light-mode .skills-container {
+  background: rgba(255, 255, 255, 0.95);
+  animation: burnLight 1.5s infinite alternate;
+}
+
+html.light-mode .skills h2 {
+  color: var(--text-dark);
+}
+
+html.light-mode .filter-btn {
+  background: #f0f0f0;
+  color: #333;
+  border: 2px solid var(--primary);
+}
+
+html.light-mode .filter-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+html.light-mode .filter-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+html.light-mode .skill-card {
+  background: #f9f9f9;
+  border-color: var(--primary);
+  color: var(--text-dark);
+}
+
+html.light-mode .skill-card h4 {
+  color: var(--text-dark);
+}
+
+html.light-mode .skill-card:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+html.light-mode .projects {
+  background: transparent;
+}
+
+html.light-mode .projects-container {
+  background: rgba(255, 255, 255, 0.95);
+  animation: burnLight 1.5s infinite alternate;
+}
+
+html.light-mode .projects h2 {
+  color: var(--text-dark);
+}
+
+html.light-mode .project-card {
+  background: #f9f9f9;
+  border-color: var(--primary);
+}
+
+html.light-mode .project-card h3 {
+  color: var(--text-dark);
+}
+
+html.light-mode .project-card p {
+  color: var(--text-light);
+}
+
+html.light-mode .project-card:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+html.light-mode .gallery {
+  background: transparent;
+}
+
+html.light-mode .gallery-container {
+  background: rgba(255, 255, 255, 0.95);
+  animation: burnLight 1.5s infinite alternate;
+}
+
+html.light-mode .gallery h2 {
+  color: var(--text-dark);
+}
+
+html.light-mode .thumb img {
+  border-color: var(--primary);
+}
+
+html.light-mode .modal {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+html.light-mode .modal img.modal-img {
+  border-color: var(--primary);
+}
+
+html.light-mode .get-in-touch {
+  background: transparent;
+}
+
+html.light-mode .contact-info-container {
+  background: rgba(255, 255, 255, 0.95);
+  animation: burnLight 1.5s infinite alternate;
+}
+
+html.light-mode .get-in-touch h2 {
+  color: var(--text-dark);
+}
+
+html.light-mode .info-card {
+  background: #f9f9f9;
+  border-color: var(--primary);
+  color: #333;
+}
+
+html.light-mode .info-card:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+html.light-mode .guestbook {
+  background: transparent;
+}
+
+html.light-mode .guestbook-container {
+  background: rgba(255, 255, 255, 0.95);
+  animation: burnLight 1.5s infinite alternate;
+}
+
+html.light-mode .guestbook h2 {
+  color: var(--text-dark);
+}
+
+html.light-mode .guestbook p {
+  color: #333;
+}
+
+html.light-mode .contact-form {
+  background: rgba(0, 102, 204, 0.05);
+  border-color: var(--primary);
+}
+
+html.light-mode .form-group input,
+html.light-mode .form-group textarea {
+  background: #ffffff;
+  border-color: var(--primary);
+  color: #333;
+}
+
+html.light-mode .form-group input::placeholder,
+html.light-mode .form-group textarea::placeholder {
+  color: #999;
+}
+
+html.light-mode .form-group label {
+  color: var(--text-dark);
+}
+
+html.light-mode .comment-card {
+  background: #f9f9f9;
+  border-color: var(--primary);
+}
+
+html.light-mode .comment-card strong {
+  color: var(--text-dark);
+}
+
+html.light-mode .comment-card p {
+  color: var(--text-light);
+}
+
+html.light-mode .comment-card:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+html.light-mode .btn-primary,
+html.light-mode .btn-secondary {
+  background: var(--primary);
+  color: white;
+}
+
+html.light-mode .btn-primary:hover,
+html.light-mode .btn-secondary:hover {
+  background: var(--primary-dark);
+}
+
+html.light-mode footer {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border-color: var(--primary);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    margin-top: 0;
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 1rem;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .about h2,
+  .skills h2,
+  .projects h2,
+  .gallery h2,
+  .guestbook h2 {
+    font-size: 1.75rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0px) scale(0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1);
+  }
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+  }
+
+  50% {
+    text-shadow: 0 0 30px rgba(255, 107, 0, 1);
+  }
+}
+
+@keyframes fireFlare {
+  0% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes burnDark {
+  0% {
+    box-shadow: 0 0 5px #8b0000, 0 0 10px #ff4500;
+    border-color: #ff4500;
+  }
+
+  100% {
+    box-shadow: 0 0 20px #ff4500, 0 0 40px #ffd700;
+    border-color: #ffd700;
+  }
+}
+
+@keyframes burnLight {
+  0% {
+    box-shadow: 0 0 5px #00008b, 0 0 10px #00bfff;
+    border-color: #00bfff;
+  }
+
+  100% {
+    box-shadow: 0 0 20px #00bfff, 0 0 40px #00ffff;
+    border-color: #00ffff;
+  }
+}
+
+/* TEXT FIRE ANIMATION FOR TITLES */
+.about h2,
+.skills h2,
+.projects h2,
+.gallery h2,
+.get-in-touch h2,
+.guestbook h2 {
+  animation: textBurnDark 1.5s infinite alternate;
+}
+
+html.light-mode .about h2,
+html.light-mode .skills h2,
+html.light-mode .projects h2,
+html.light-mode .gallery h2,
+html.light-mode .get-in-touch h2,
+html.light-mode .guestbook h2 {
+  animation: textBurnLight 1.5s infinite alternate;
+}
+
+@keyframes textBurnDark {
+  0% {
+    text-shadow: 0 -2px 4px #ff4500, 0 -4px 8px #b22222;
+  }
+
+  100% {
+    text-shadow: 0 -2px 10px #ff4500, 0 -8px 20px #ffd700, 0 -15px 30px #8b0000;
+  }
+}
+
+@keyframes textBurnLight {
+  0% {
+    text-shadow: 0 -2px 4px #00bfff, 0 -4px 8px #00008b;
+  }
+
+  100% {
+    text-shadow: 0 -2px 10px #00bfff, 0 -8px 20px #00ffff, 0 -15px 30px #00008b;
+  }
+}
+
+/* LAVA CIRCLE LOADING SCREEN ANIMATIONS */
+@keyframes crackAnimation {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 40px rgba(255, 107, 0, 0.6)) brightness(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 80px rgba(255, 107, 0, 1)) brightness(1.4);
+  }
+
+  70% {
+    transform: scale(0.98) rotateZ(2deg);
+    filter: drop-shadow(0 0 60px rgba(255, 107, 0, 0.8)) brightness(1.2) invert(0.1);
+  }
+
+  100% {
+    transform: scale(1) rotateZ(0deg);
+    filter: drop-shadow(0 0 100px rgba(255, 107, 0, 1)) brightness(1.6) blur(2px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -100%) scale(0.8);
+  }
+}
+
+@keyframes lavaGlow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 40px rgba(255, 107, 0, 0.6));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 60px rgba(255, 107, 0, 0.8));
+  }
+}
+
+@keyframes crackedItPulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 107, 0, 0.6);
+  }
+
+  50% {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 107, 0, 0.8);
+  }
+}
+
+@keyframes explosionFlash {
+  0% {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 107, 0, 0.4) 70%, transparent 100%);
+  }
+
+  100% {
+    opacity: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(255, 107, 0, 0) 70%, transparent 100%);
+  }
+}
+
+@keyframes shockwavePulse {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+    border-color: rgba(255, 69, 0, 0.8);
+    box-shadow: 0 0 30px rgba(255, 69, 0, 0.8);
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+    border-color: rgba(255, 69, 0, 0);
+    box-shadow: 0 0 60px rgba(255, 69, 0, 0);
+  }
+}
+
+/* ========== LIGHT MODE FORCED VISIBILITY OVERRIDES ========== */
+/* These use !important to ensure light mode content is always visible */
+
+html.light-mode #app {
+  color: #1a1a1a !important;
+}
+
+/* Force #app to be visible and above background */
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+.app-container {
+  position: relative;
+  z-index: 1;
+}
+
+html.light-mode #app,
+html.light-mode .app-container {
+  position: relative !important;
+  z-index: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+html.light-mode .hero-content h1,
+html.light-mode .hero h1 {
+  color: #1a1a1a !important;
+  text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light-mode .hero-content p,
+html.light-mode .hero p {
+  color: #1a1a1a !important;
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light-mode .highlight-text {
+  color: #cc0000 !important;
+  background: linear-gradient(135deg, #ff4500, #cc0000, #ff6347) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 15px rgba(255, 69, 0, 0.8)) drop-shadow(0 0 25px rgba(204, 0, 0, 0.5)) !important;
+}
+
+html.light-mode .about-container,
+html.light-mode .skills-container,
+html.light-mode .projects-container,
+html.light-mode .gallery-container,
+html.light-mode .contact-info-container,
+html.light-mode .guestbook-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light-mode .about h2,
+html.light-mode .skills h2,
+html.light-mode .projects h2,
+html.light-mode .gallery h2,
+html.light-mode .get-in-touch h2,
+html.light-mode .guestbook h2 {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .about-title {
+  color: #cc0000 !important;
+}
+
+html.light-mode .about p,
+html.light-mode .expertise-item p,
+html.light-mode .expertise-item h3 {
+  color: #333 !important;
+}
+
+html.light-mode .btn-primary {
+  background: linear-gradient(135deg, #cc0000, #990000) !important;
+  color: white !important;
+}
+
+html.light-mode .scroll-indicator span {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .arrow {
+  color: #cc0000 !important;
+}
+
+/* Ensure navbar is visible in light mode */
+html.light-mode .navbar {
+  background: rgba(255, 255, 255, 0.98) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1000 !important;
+}
+
+html.light-mode .nav-logo,
+html.light-mode .nav-link {
+  color: #1a1a1a !important;
+}
+
+/* Ensure hero section is visible */
+html.light-mode .hero {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.light-mode .hero-content {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.light-mode .hero-content p,
+html.light-mode .hero p {
+  color: #1a1a1a !important;
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.9) !important;
+}
+
+
+html.light-mode .highlight-text {
+  color: #0066cc !important;
+  background: linear-gradient(135deg, #0066cc, #00bfff, #60a5fa) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 10px rgba(0, 102, 204, 0.4)) !important;
+}
+
+html.light-mode .about-container,
+html.light-mode .skills-container,
+html.light-mode .projects-container,
+html.light-mode .gallery-container,
+html.light-mode .contact-info-container,
+html.light-mode .guestbook-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light-mode .about h2,
+html.light-mode .skills h2,
+html.light-mode .projects h2,
+html.light-mode .gallery h2,
+html.light-mode .get-in-touch h2,
+html.light-mode .guestbook h2 {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .about-title {
+  color: #0066cc !important;
+}
+
+html.light-mode .about p,
+html.light-mode .expertise-item p,
+html.light-mode .expertise-item h3 {
+  color: #333 !important;
+}
+
+html.light-mode .btn-primary {
+  background: linear-gradient(135deg, #0066cc, #004499) !important;
+  color: white !important;
+}
+
+html.light-mode .scroll-indicator span {
+  color: #1a1a1a !important;
+}
+
+html.light-mode .arrow {
+  color: #0066cc !important;
+}
+
+/* Burned Paper specific styles */
+.burned-paper-container {
+  filter: url(#burned-edge);
+}
+
+/* =========================================
+   BURNED PAPER EFFECT FOR ALL CONTAINERS
+   ========================================= */
+
+/* Apply burned paper look to main section containers - GHOST RIDER THEME */
+.about .about-container,
+.skills .skills-container,
+.projects .projects-container,
+.gallery .gallery-container,
+.get-in-touch .contact-info-container,
+.guestbook .guestbook-container {
+  position: relative;
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1810 50%, #1a0a00 100%) !important;
+  box-shadow:
+    inset 0 0 20px 5px rgba(255, 69, 0, 0.3),
+    inset 0 0 60px 10px rgba(139, 0, 0, 0.4),
+    0 0 30px rgba(255, 69, 0, 0.4),
+    0 0 60px rgba(139, 0, 0, 0.3);
+  border: 3px solid #ff4500 !important;
+  border-radius: 0 !important;
+  /* No rounded corners - will be masked by burned edge */
+  color: #f5f5f5 !important;
+  overflow: visible;
+}
+
+/* Burned edge overlay - masks the box edge with organic burned look */
+.about .about-container::before,
+.skills .skills-container::before,
+.projects .projects-container::before,
+.gallery .gallery-container::before,
+.get-in-touch .contact-info-container::before,
+.guestbook .guestbook-container::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(to bottom,
+      #1a0a00 0%,
+      transparent 8%,
+      transparent 92%,
+      #1a0a00 100%),
+    linear-gradient(to right,
+      #1a0a00 0%,
+      transparent 5%,
+      transparent 95%,
+      #1a0a00 100%);
+  border: 15px solid #0a0500;
+  filter: url(#burned-edge);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Ember glow effect on edges */
+.about .about-container::after,
+.skills .skills-container::after,
+.projects .projects-container::after,
+.gallery .gallery-container::after,
+.get-in-touch .contact-info-container::after,
+.guestbook .guestbook-container::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 4px solid rgba(255, 69, 0, 0.5);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 1;
+  animation: ember-pulse 3s infinite alternate;
+}
+
+@keyframes ember-pulse {
+  0% {
+    border-color: rgba(255, 69, 0, 0.3);
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+  }
+
+  100% {
+    border-color: rgba(255, 165, 0, 0.6);
+    box-shadow: 0 0 25px rgba(255, 165, 0, 0.5);
+  }
+}
+
+/* Override text colors inside burned paper containers - HIGH VISIBILITY */
+.about .about-container h2,
+.skills .skills-container h2,
+.projects .projects-container h2,
+.gallery .gallery-container h2,
+.get-in-touch .contact-info-container h2,
+.guestbook .guestbook-container h2 {
+  color: #f5f5f5 !important;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+}
+
+.about .about-container .about-title,
+.about .about-container p,
+.skills .skills-container p,
+.projects .projects-container p,
+.gallery .gallery-container p,
+.get-in-touch .contact-info-container p,
+.guestbook .guestbook-container p {
+  color: #e5e5e5 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 500;
+}
+
+.about .about-container .expertise-item,
+.skills .skills-container .skill-card,
+.projects .projects-container .project-card,
+.get-in-touch .contact-info-container .info-card,
+.guestbook .guestbook-container .comment-card {
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid #ff0000 !important;
+  /* Pure Red for Dark Mode */
+  color: #f5f5f5 !important;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.about .about-container .expertise-item h3,
+.skills .skills-container .skill-card h4,
+.projects .projects-container .project-card h3,
+.get-in-touch .contact-info-container .info-content h3,
+.guestbook .guestbook-container .comment-header h3 {
+  color: #ff3333 !important;
+  /* Bright Red for Headers */
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.about .about-container .expertise-item p,
+.skills .skills-container .skill-card p,
+.projects .projects-container .project-card p,
+.get-in-touch .contact-info-container .info-content p,
+.guestbook .guestbook-container .comment-card p {
+  color: #d1d5db !important;
+}
+
+/* Ensure long text (like emails) breaks to fit container */
+.get-in-touch .contact-info-container .info-content p,
+.about .about-container p,
+.skills .skills-container p,
+.projects .projects-container p {
+  word-break: break-word;
+  /* Ensures long words like emails wrap */
+  overflow-wrap: break-word;
+  /* Modern standard */
+  max-width: 100%;
+}
+
+/* Specific adjustment for info cards to prevent overflow */
+.get-in-touch .contact-info-container .info-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+  /* Contains overflowing content */
+}
+
+.get-in-touch .contact-info-container .info-content {
+  flex: 1;
+  min-width: 0;
+  /* Critical for flex child text wrapping */
+}
+
+/* Filter buttons on burned paper */
+.skills .skills-container .filter-btn {
+  background: rgba(0, 0, 0, 0.7) !important;
+  color: #e5e5e5 !important;
+  border-color: #ff0000 !important;
+  /* Red Border */
+}
+
+/* Icons on burned paper */
+.about .about-container .expertise-icon,
+.get-in-touch .contact-info-container .info-icon {
+  color: #ff0000 !important;
+  /* Pure Red Icons */
+  filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6));
+}
+
+/* Personal Information Grid Layout */
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.contact-info-grid .info-card {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  min-height: 100px;
+}
+
+.skills .skills-container .filter-btn:hover,
+.skills .skills-container .filter-btn.active {
+  background: #ff4500 !important;
+  color: white !important;
+  border-color: #ff4500 !important;
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+}
+
+/* Accent colors on burned paper */
+.about .about-container .accent,
+.skills .skills-container .accent,
+.projects .projects-container .accent {
+  color: #ff4500 !important;
+  text-shadow: 0 0 10px rgba(255, 69, 0, 0.8);
+}
+
+/* Icons on burned paper */
+.about .about-container .expertise-icon,
+.get-in-touch .contact-info-container .info-icon {
+  color: #ff4500 !important;
+  filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.6));
+}
+
+/* Guestbook form on burned paper */
+.guestbook .guestbook-container input,
+.guestbook .guestbook-container textarea {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border-color: rgba(255, 69, 0, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.guestbook .guestbook-container input::placeholder,
+.guestbook .guestbook-container textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Buttons on burned paper */
+.about .about-container .btn-secondary {
+  border-color: #ff4500 !important;
+  color: #ff4500 !important;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.about .about-container .btn-secondary:hover {
+  background: #ff4500 !important;
+  color: white !important;
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+}
+
+.guestbook .guestbook-container .btn-primary {
+  background: linear-gradient(135deg, #ff4500, #b22222) !important;
+  color: white !important;
+}
+
+/* =========================================
+   LIGHT MODE SPECIFIC OVERRIDES FOR BURNED LAYOUT
+   ========================================= */
+
+html.light-mode .about .about-container .expertise-item,
+html.light-mode .skills .skills-container .skill-card,
+html.light-mode .projects .projects-container .project-card,
+html.light-mode .get-in-touch .contact-info-container .info-card,
+html.light-mode .guestbook .guestbook-container .comment-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: #0066cc !important;
+  /* Blue for Light Mode */
+  color: #1a1a1a !important;
+}
+
+html.light-mode .about .about-container .expertise-item h3,
+html.light-mode .skills .skills-container .skill-card h4,
+html.light-mode .projects .projects-container .project-card h3,
+html.light-mode .get-in-touch .contact-info-container .info-content h3,
+html.light-mode .guestbook .guestbook-container .comment-header h3 {
+  color: #0066cc !important;
+  /* Blue Headers */
+  text-shadow: none !important;
+}
+
+html.light-mode .about .about-container .expertise-item p,
+html.light-mode .skills .skills-container .skill-card p,
+html.light-mode .projects .projects-container .project-card p,
+html.light-mode .get-in-touch .contact-info-container .info-content p,
+html.light-mode .guestbook .guestbook-container .comment-card p {
+  color: #333333 !important;
+}
+
+html.light-mode .about .about-container .expertise-icon,
+html.light-mode .get-in-touch .contact-info-container .info-icon {
+  color: #0066cc !important;
+  /* Blue Icons */
+  filter: none !important;
+}
+
+html.light-mode .accent,
+html.light-mode .about .about-container .accent,
+html.light-mode .skills .skills-container .accent,
+html.light-mode .projects .projects-container .accent,
+html.light-mode .get-in-touch .contact-info-container .accent,
+html.light-mode .guestbook .guestbook-container .accent {
+  color: #0066cc !important;
+  text-shadow: none !important;
+}
+
+html.light-mode .skills .skills-container .filter-btn {
+  background: white !important;
+  color: #0066cc !important;
+  border-color: #0066cc !important;
+}
+
+html.light-mode .skills .skills-container .filter-btn:hover,
+html.light-mode .skills .skills-container .filter-btn.active {
+  background: #0066cc !important;
+  color: white !important;
+}
+
+html.light-mode .guestbook .guestbook-container input,
+html.light-mode .guestbook .guestbook-container textarea {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: #0066cc !important;
+  color: #1a1a1a !important;
+}
+
+html.light-mode .guestbook .guestbook-container input::placeholder,
+html.light-mode .guestbook .guestbook-container textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+html.light-mode .guestbook .guestbook-container .btn-primary {
+  background: linear-gradient(135deg, #0066cc, #004c99) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3) !important;
+}
+
+html.light-mode .highlight-text {
+  color: #0066cc !important;
+  background: linear-gradient(135deg, #0066cc, #004c99, #60a5fa) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 15px rgba(0, 102, 204, 0.4)) drop-shadow(0 0 25px rgba(0, 76, 153, 0.2)) !important;
+}
+
+html.light-mode .about-title {
+  color: #0066cc !important;
+  text-shadow: none !important;
+}
+
+html.light-mode .about .about-container .btn-secondary {
+  border-color: #0066cc !important;
+  color: #0066cc !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light-mode .about .about-container .btn-secondary:hover {
+  background: #0066cc !important;
+  color: white !important;
+  box-shadow: 0 0 15px rgba(0, 102, 204, 0.6) !important;
+}
