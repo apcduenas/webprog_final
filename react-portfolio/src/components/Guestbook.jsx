@@ -78,15 +78,17 @@ const Guestbook = () => {
                             required
                         ></textarea>
                     </div>
-                    <div className="form-group checkbox">
-                        <label className="checkbox-label">
-                            <input
-                                type="checkbox"
-                                name="isPublic"
-                                checked={formData.isPublic}
-                                onChange={handleInputChange}
-                            />
-                            <span>Make this public</span>
+                    <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', justifyContent: 'flex-start' }}>
+                        <input
+                            type="checkbox"
+                            name="isPublic"
+                            id="isPublic"
+                            checked={formData.isPublic}
+                            onChange={handleInputChange}
+                            style={{ width: '18px', height: '18px', margin: 0, cursor: 'pointer' }}
+                        />
+                        <label htmlFor="isPublic" style={{ cursor: 'pointer', margin: 0, fontSize: '1rem', color: 'var(--text-dark)', fontWeight: '500' }}>
+                            Make this public
                         </label>
                     </div>
                     <button type="submit" className="btn-primary">Send Message</button>
