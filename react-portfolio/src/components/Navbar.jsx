@@ -11,8 +11,13 @@ const Navbar = ({ toggleTheme, isLightMode }) => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div className="nav-logo">
-          Anthony's <span className="accent">Personal Website</span>
+        <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <img
+            src="./images/Logo.png"
+            alt="Logo"
+            style={{ height: '60px', width: 'auto', filter: 'drop-shadow(0 0 10px var(--primary))' }}
+          />
+          <span>Anthony's <span className="accent">Personal Website</span></span>
         </div>
         <div className="nav-links">
           <a href="#home" className="nav-link" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>Home</a>
