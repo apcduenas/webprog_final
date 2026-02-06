@@ -68,7 +68,8 @@ const IntroVideo = ({ onComplete }) => {
                 }}
                 muted
                 playsInline
-                src="/images/Intro.mp4"
+                src={`${import.meta.env.BASE_URL}images/Intro.mp4`}
+
                 onEnded={handleSkip}
             />
         </div>

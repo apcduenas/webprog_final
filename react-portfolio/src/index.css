@@ -51,15 +51,16 @@ body {
 }
 
 body {
-  background: url('/images/GhostRider.jpg') center center/cover no-repeat fixed;
+  background: url('/webprog_final/images/GhostRider.jpg') center center/cover no-repeat fixed;
   color: var(--text-dark);
   transition: all 0.3s ease;
 }
 
 html.light-mode body {
-  background: url('/images/Lighty.jpg') center center/cover no-repeat fixed;
+  background: url('/webprog_final/images/Lighty.jpg') center center/cover no-repeat fixed;
   color: var(--text-dark);
 }
+
 
 /* NAVBAR */
 .navbar {

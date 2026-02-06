@@ -4,7 +4,10 @@ const ThemeTransition = ({ targetTheme, onComplete }) => {
     const [visible, setVisible] = useState(true);
     const containerRef = useRef(null);
 
-    const videoSrc = targetTheme === 'light' ? '/images/Effect.mp4' : '/images/GhostRiderVid.mp4';
+    const videoSrc = targetTheme === 'light'
+        ? `${import.meta.env.BASE_URL}images/Effect.mp4`
+        : `${import.meta.env.BASE_URL}images/GhostRiderVid.mp4`;
+
 
     const handleSkip = () => {
         // Just callback, let React handle unmounting via state change in parent
