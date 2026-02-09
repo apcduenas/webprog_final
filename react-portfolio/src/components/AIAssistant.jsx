@@ -62,10 +62,19 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
             'sino', 'taga', 'ba', 'kamusta', 'bata', 'ilang', 'ilan', 'kayo', 'niyo', 'niya',
             'nila', 'ko', 'akin', 'amin', 'atin', 'inyo', 'kanino', 'po', 'opo', 'yung', 'ang',
             'ng', 'sa', 'na', 'pa', 'nga', 'din', 'rin', 'daw', 'raw', 'naman', 'pala', 'kaya',
-            'mga', 'magkakapatid', 'kapatid', 'magulang', 'tatay', 'nanay', 'tira', 'bahay',
-            'aral', 'gwapo', 'ganda', 'pangalan'
+            'mga', 'kapatid', 'pamilya', 'magulang', 'tatay', 'nanay', 'tira', 'bahay',
+            'aral', 'gwapo', 'pogi', 'ganda', 'pangalan', 'kumusta', 'nilalayon', 'gawa', 'kababayan'
         ];
-        const isTagalog = tagalogKeywords.some(keyword => lowerText.split(/\s+/).includes(keyword)) || lowerText.includes('tagalog');
+
+        // Clean text of punctuation for better matching
+        const cleanText = lowerText.replace(/[?!.,]/g, '');
+        const words = cleanText.split(/\s+/);
+
+        const isTagalog = tagalogKeywords.some(keyword => words.includes(keyword)) ||
+            lowerText.includes('tagalog') ||
+            lowerText.includes('kaba') || // handle common contraction 'ka ba' -> 'kaba'
+            lowerText.includes('ano') ||
+            lowerText.includes('naman');
 
         // --- PERSONAL INFO LOGIC ---
 
@@ -172,6 +181,12 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
             return isTagalog
                 ? "Pwede mo akong kontakin gamit ang Contact section sa baba, o mag-iwan ng mensahe sa Guestbook."
                 : "You can reach me through the Contact section below, or leave a message in the Guestbook.";
+        }
+
+        if (lowerText.includes('pogi') || lowerText.includes('gwapo') || lowerText.includes('handsome') || lowerText.includes('cute')) {
+            return isTagalog
+                ? "Oo tanong mopa sa mama ko"
+                : "Yes, just ask my mom!";
         }
 
         if (lowerText.includes('cool') || lowerText.includes('wow') || lowerText.includes('nice') || lowerText.includes('astig') || lowerText.includes('galing')) {
