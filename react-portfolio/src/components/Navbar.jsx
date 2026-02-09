@@ -1,6 +1,6 @@
 import FlameText from './FlameText';
 
-const Navbar = ({ toggleTheme, isLightMode }) => {
+const Navbar = ({ toggleTheme, isLightMode, toggleAIChat }) => {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {

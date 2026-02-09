@@ -11,12 +11,15 @@ import Footer from './components/Footer';
 import FireCursor from './components/FireCursor';
 import IntroVideo from './components/IntroVideo';
 import ThemeTransition from './components/ThemeTransition';
+import AIAssistant from './components/AIAssistant';
 import './index.css'; // Ensure global styles are applied
 
 function App() {
   const [theme, setTheme] = useState('dark');
   const [showIntro, setShowIntro] = useState(true);
   const [transitionTheme, setTransitionTheme] = useState(null); // 'light' or 'dark' or null
+
+  const [isAIChatOpen, setIsAIChatOpen] = useState(false);
 
   // Initialize Theme from LocalStorage
   useEffect(() => {
@@ -74,7 +77,11 @@ function App() {
       </svg>
 
       <div id="app">
-        <Navbar toggleTheme={toggleTheme} isLightMode={theme === 'light'} />
+        <Navbar
+          toggleTheme={toggleTheme}
+          isLightMode={theme === 'light'}
+          toggleAIChat={() => setIsAIChatOpen(prev => !prev)}
+        />
         <Hero />
         <About />
         <Skills />
@@ -83,6 +90,7 @@ function App() {
         <ContactInfo />
         <Guestbook />
         <Footer />
+        <AIAssistant isOpen={isAIChatOpen} setIsOpen={setIsAIChatOpen} />
       </div>
     </div>
   );
