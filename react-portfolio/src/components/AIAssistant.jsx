@@ -63,7 +63,8 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
             'nila', 'ko', 'akin', 'amin', 'atin', 'inyo', 'kanino', 'po', 'opo', 'yung', 'ang',
             'ng', 'sa', 'na', 'pa', 'nga', 'din', 'rin', 'daw', 'raw', 'naman', 'pala', 'kaya',
             'mga', 'kapatid', 'pamilya', 'magulang', 'tatay', 'nanay', 'tira', 'bahay',
-            'aral', 'gwapo', 'pogi', 'ganda', 'pangalan', 'kumusta', 'nilalayon', 'gawa', 'kababayan'
+            'aral', 'gwapo', 'pogi', 'ganda', 'pangalan', 'kumusta', 'nilalayon', 'gawa', 'kababayan',
+            'si', 'naba', 'may', 'meron', 'at', 'yata', 'talaga', 'mismo'
         ];
 
         // Clean text of punctuation for better matching
@@ -72,9 +73,12 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
 
         const isTagalog = tagalogKeywords.some(keyword => words.includes(keyword)) ||
             lowerText.includes('tagalog') ||
-            lowerText.includes('kaba') || // handle common contraction 'ka ba' -> 'kaba'
+            lowerText.includes('kaba') ||
+            lowerText.includes('naba') ||
             lowerText.includes('ano') ||
-            lowerText.includes('naman');
+            lowerText.includes('naman') ||
+            lowerText.includes(' ba') ||
+            lowerText.includes('ba ');
 
         // --- PERSONAL INFO LOGIC ---
 
