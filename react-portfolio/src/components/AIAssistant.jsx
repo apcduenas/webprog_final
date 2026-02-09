@@ -118,6 +118,13 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
                 : "There are three of us siblings and I am the eldest. My second sibling is Ace Duenas (Male, born December 13, 2010), and the youngest is Althea Duenas (Female, born December 7, 2012).";
         }
 
+        // Relationship Status
+        if (lowerText.includes('girlfriend') || lowerText.includes('gf') || lowerText.includes('jowa') || lowerText.includes('kasintahan')) {
+            return isTagalog
+                ? "Wala pa siyang girlfriend, Pwede kaba?"
+                : "He doesn't have a girlfriend yet. Are you available?";
+        }
+
         // Education / School
         if (lowerText.includes('school') || lowerText.includes('study') || lowerText.includes('university') || lowerText.includes('college') || lowerText.includes('aral') || lowerText.includes('pasok') || lowerText.includes('course') || lowerText.includes('year')) {
             return isTagalog
