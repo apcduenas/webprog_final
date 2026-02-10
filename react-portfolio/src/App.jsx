@@ -62,17 +62,17 @@ function App() {
       {/* Fire Cursor - Needs to know current theme for color */}
       <FireCursor isLightMode={theme === 'light'} />
 
-      {/* SVG Filters (Hidden) - Copied from original index.html */}
+      {/* SVG Filters (Hidden) - Optimized for Performance */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
         <filter id="charred-edge">
-          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
         </filter>
         <filter id="heat-distortion">
-          <feTurbulence type="fractalNoise" baseFrequency="0.02 0.08" numOctaves="3" result="noise">
-            <animate attributeName="baseFrequency" values="0.02 0.08; 0.02 0.12; 0.02 0.08" dur="2s" repeatCount="indefinite" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.02 0.08" numOctaves="1" result="noise">
+            <animate attributeName="baseFrequency" values="0.02 0.08; 0.02 0.10; 0.02 0.08" dur="3s" repeatCount="indefinite" />
           </feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" />
         </filter>
       </svg>
 

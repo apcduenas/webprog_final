@@ -17,18 +17,16 @@ const FireCursor = ({ isLightMode }) => {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 5 + 2;
-                this.speedX = Math.random() * 3 - 1.5;
-                this.speedY = Math.random() * -3 - 1;
+                this.size = Math.random() * 4 + 2;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * -2 - 0.5;
                 this.life = 1;
-                this.decay = Math.random() * 0.02 + 0.01;
+                this.decay = Math.random() * 0.03 + 0.01;
 
                 if (isLightMode) {
-                    // Light mode: Blue flames
-                    this.color = Math.random() > 0.5 ? '#0066cc' : '#00bfff'; // Blue tones
+                    this.color = Math.random() > 0.5 ? '#0066cc' : '#00bfff';
                 } else {
-                    // Dark mode: Orange/Gold flames
-                    this.color = Math.random() > 0.5 ? '#FF4500' : '#FFD700'; // Hellfire Orange or Success Gold
+                    this.color = Math.random() > 0.5 ? '#FF4500' : '#FFD700';
                 }
             }
 
@@ -36,32 +34,28 @@ const FireCursor = ({ isLightMode }) => {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 this.life -= this.decay;
-                this.size *= 0.97;
+                this.size *= 0.96;
             }
 
             draw() {
-                ctx.save();
                 ctx.globalAlpha = this.life;
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
-                ctx.restore();
             }
         }
 
-        let mouseX = 0;
-        let mouseY = 0;
+        let lastSpawnTime = 0;
+        const spawnInterval = 16; // Spawn at most every 16ms (~60fps)
 
-        // We need to handle mouse move to spawn particles. 
-        // Since this effect relies on mouse movement, we'll add the listener to window.
         const handleMouseMove = (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            for (let i = 0; i < 3; i++) {
-                particles.push(new Particle(mouseX, mouseY));
+            const now = Date.now();
+            if (now - lastSpawnTime < spawnInterval) return;
+            lastSpawnTime = now;
+
+            for (let i = 0; i < 2; i++) {
+                particles.push(new Particle(e.clientX, e.clientY));
             }
         };
 
@@ -71,6 +65,11 @@ const FireCursor = ({ isLightMode }) => {
 
         const animateParticles = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Limited particle count
+            if (particles.length > 100) {
+                particles.splice(0, particles.length - 100);
+            }
 
             for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].update();
