@@ -4,9 +4,10 @@ const ThemeTransition = ({ targetTheme, onComplete, videoSrc, fadeOut = false, z
 
     const containerRef = useRef(null);
 
+    const base = import.meta.env.BASE_URL;
     const finalVideoSrc = videoSrc || (targetTheme === 'light'
-        ? '/images/Effect.mp4'
-        : '/images/GhostRiderVid.mp4');
+        ? `${base}images/Effect.mp4`
+        : `${base}images/GhostRiderVid.mp4`);
 
     const handleSkip = useCallback(() => {
         if (fadeOut && containerRef.current) {

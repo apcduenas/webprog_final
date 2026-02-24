@@ -13,7 +13,7 @@ const Navbar = ({ toggleTheme, isLightMode }) => {
       <div className="nav-container">
         <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           <img
-            src="/images/Logo.png"
+            src={`${import.meta.env.BASE_URL}images/Logo.png`}
             alt="Logo"
             style={{ height: '60px', width: 'auto', filter: 'drop-shadow(0 0 10px var(--primary))' }}
           />

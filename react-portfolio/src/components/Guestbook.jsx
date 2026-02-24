@@ -114,7 +114,7 @@ const Guestbook = () => {
                                             {msg.created_at ? new Date(msg.created_at).toLocaleDateString() : ''}
                                         </span>
                                     </div>
-                                    <p>{msg.message}</p>
+                                    <p>{msg.comment || msg.message}</p>
                                 </div>
                             ))
                         )}
