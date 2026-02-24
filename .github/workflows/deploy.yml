@@ -49,7 +49,7 @@ jobs:
         run: npm run build
         working-directory: react-portfolio
         env:
-          VITE_BASE: '/webprog_final/'
+          # The frontend only needs to know the backend API URL.
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
       - name: Setup Pages
