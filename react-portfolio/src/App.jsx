@@ -10,6 +10,7 @@ import Guestbook from './components/Guestbook';
 import Footer from './components/Footer';
 import FireCursor from './components/FireCursor';
 import ThemeTransition from './components/ThemeTransition';
+import IntroVideo from './components/IntroVideo';
 import AIAssistant from './components/AIAssistant';
 import './index.css'; // Ensure global styles are applied
 
@@ -41,16 +42,9 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Intro Video - Only shows on initial load if we want. 
-           In the original code, it plays if the element exists. 
-           We'll keep it as a one-time thing on mount. */}
+      {/* Intro Video - plays Intro.mp4 on first page load */}
       {showIntro && (
-        <ThemeTransition
-          videoSrc={`${import.meta.env.BASE_URL}images/Intro.mp4`}
-          fadeOut={true}
-          zIndex={9998}
-          onComplete={() => setShowIntro(false)}
-        />
+        <IntroVideo onComplete={() => setShowIntro(false)} />
       )}
 
       {/* Theme Transition Video */}

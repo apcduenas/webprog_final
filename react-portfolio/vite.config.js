@@ -7,5 +7,5 @@ import react from '@vitejs/plugin-react'
 //   Vercel:       '/'              (set in Vercel env vars)
 export default defineConfig({
   plugins: [react()],
-  base: process.env.VITE_BASE || '/webprog_final/',
+  base: process.env.VITE_BASE || '/',
 })

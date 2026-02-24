@@ -1,124 +1,147 @@
 import { useState, useEffect } from 'react';
-
-// IMPORTANT: Once you deploy your backend to Render, replace this URL with your actual Render URL.
-// Example: const API_URL = 'https://your-project-name.onrender.com';
-// For now, it defaults to localhost for testing if you run python app.py locally.
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
+import { supabase } from '../supabase';
+import FlameText from './FlameText';
 
 const Guestbook = () => {
-    const [messages, setMessages] = useState([]);
-    const [name, setName] = useState('');
-    const [message, setMessage] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [entries, setEntries] = useState([]);
+    const [formData, setFormData] = useState({
+        name: '',
+        comment: '',
+        isPublic: false
+    });
+    const [loading, setLoading] = useState(true);
+    const [sending, setSending] = useState(false);
 
-    // GET Method: Fetch messages from Flask Backend
-    const fetchMessages = async () => {
-        try {
-            const response = await fetch(`${API_URL}/api/guestbook`);
-            if (!response.ok) {
-                throw new Error('Failed to connect to backend');
-            }
-            const result = await response.json();
-            // Expecting the backend to return { "data": [...] }
-            setMessages(result.data || []);
-        } catch (err) {
-            console.error("Error fetching messages:", err);
-            // Set empty array on error so page doesn't crash
-            setMessages([]);
-        }
-    };
-
-    // Load messages when component mounts
+    // Fetch messages on mount + real-time subscription
     useEffect(() => {
         fetchMessages();
+
+        // Real-time subscription: new comments appear instantly
+        const subscription = supabase
+            .channel('public:messages')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
+                setEntries(prev => [payload.new, ...prev]);
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(subscription);
+        };
     }, []);
 
-    // POST Method: Send message to Flask Backend
+    const fetchMessages = async () => {
+        setLoading(true);
+        const { data, error } = await supabase
+            .from('messages')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error fetching messages:', error);
+        } else {
+            setEntries(data || []);
+        }
+        setLoading(false);
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name.trim() || !message.trim()) return;
+        if (!formData.name.trim() || !formData.comment.trim()) return;
 
-        setLoading(true);
-        setError(null);
+        setSending(true);
 
         try {
-            const response = await fetch(`${API_URL}/api/guestbook`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, message }),
-            });
+            const { error } = await supabase
+                .from('messages')
+                .insert([
+                    {
+                        name: formData.name,
+                        comment: formData.comment,
+                        public: formData.isPublic
+                    }
+                ]);
 
-            if (!response.ok) {
-                throw new Error('Failed to send message');
-            }
+            if (error) throw error;
 
-            // Clear form and refresh list
-            setName('');
-            setMessage('');
-            await fetchMessages();
-
-        } catch (err) {
-            setError('Failed to send message. Please try again later.');
-            console.error(err);
+            setFormData({ name: '', comment: '', isPublic: false });
+            // No alert — comment appears instantly via real-time subscription
+        } catch (error) {
+            console.error('Error adding comment: ', error);
+            alert('Failed to send comment. Please try again.');
         } finally {
-            setLoading(false);
+            setSending(false);
         }
     };
 
     return (
-        <section className="guestbook" id="guestbook">
+        <section id="guestbook" className="guestbook">
             <div className="guestbook-container">
-                <h2>Guestbook</h2>
-                <p>Leave a mark! Sign my guestbook below.</p>
-
+                <h2><FlameText text="Guestbook" /></h2>
+                <p style={{ textAlign: 'center', marginBottom: '2rem' }}>Leave a mark! Drop a comment below.</p>
                 <form className="contact-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <input
                             type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
                             placeholder="Your Name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                     </div>
                     <div className="form-group">
                         <textarea
-                            placeholder="Your Message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            name="comment"
+                            value={formData.comment}
+                            onChange={handleInputChange}
+                            placeholder="Your Message..."
                             required
                         ></textarea>
                     </div>
-                    {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
-                    <button type="submit" className="btn-primary" disabled={loading}>
-                        {loading ? 'Signing...' : 'Sign Guestbook'}
+                    <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', justifyContent: 'flex-start' }}>
+                        <input
+                            type="checkbox"
+                            name="isPublic"
+                            id="isPublic"
+                            checked={formData.isPublic}
+                            onChange={handleInputChange}
+                            style={{ width: '18px', height: '18px', margin: 0, cursor: 'pointer' }}
+                        />
+                        <label htmlFor="isPublic" style={{ cursor: 'pointer', margin: 0, fontSize: '1rem', color: 'var(--text-dark)', fontWeight: '500' }}>
+                            Make this public
+                        </label>
+                    </div>
+                    <button type="submit" className="btn-primary" disabled={sending}>
+                        {sending ? 'Sending...' : 'Comment'}
                     </button>
                 </form>
 
                 <div className="comments-wrapper">
-                    <h3>Recent Signatures</h3>
-                    <div className="comments-grid">
-                        {messages.length === 0 ? (
-                            <p style={{ color: '#aaa', textAlign: 'center', width: '100%' }}>
-                                No messages yet. Or backend is sleeping (Render free tier).
-                            </p>
-                        ) : (
-                            messages.map((msg, index) => (
-                                <div key={msg.id || index} className="comment-card">
+                    <h3>Recent Messages</h3>
+                    {loading ? (
+                        <p style={{ textAlign: 'center' }}>Loading comments...</p>
+                    ) : entries.length === 0 ? (
+                        <p style={{ textAlign: 'center' }}>No comments yet. Be the first one!</p>
+                    ) : (
+                        <div className="comments-grid">
+                            {entries.map((entry) => (
+                                <div key={entry.id} className="comment-card">
                                     <div className="comment-header">
-                                        <strong>{msg.name}</strong>
-                                        <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>
-                                            {msg.created_at ? new Date(msg.created_at).toLocaleDateString() : ''}
-                                        </span>
+                                        <h3>{entry.name}</h3>
                                     </div>
-                                    <p>{msg.comment || msg.message}</p>
+                                    <p>{entry.comment}</p>
                                 </div>
-                            ))
-                        )}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
