@@ -46,7 +46,7 @@ function App() {
            We'll keep it as a one-time thing on mount. */}
       {showIntro && (
         <ThemeTransition
-          videoSrc="/images/Intro.mp4"
+          videoSrc={`${import.meta.env.BASE_URL}images/Intro.mp4`}
           fadeOut={true}
           zIndex={9998}
           onComplete={() => setShowIntro(false)}
