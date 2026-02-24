@@ -1,0 +1,29 @@
+﻿diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index 79e0eb2..f06c23f 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -49,7 +49,7 @@ jobs:
+         run: npm run build
+         working-directory: react-portfolio
+         env:
+-          # The frontend only needs to know the backend API URL.
++          VITE_BASE: '/webprog_final/'
+           VITE_API_URL: ${{ secrets.VITE_API_URL }}
+ 
+       - name: Setup Pages
+diff --git a/react-portfolio/vite.config.js b/react-portfolio/vite.config.js
+index beb9a76..23c5d5c 100644
+--- a/react-portfolio/vite.config.js
++++ b/react-portfolio/vite.config.js
+@@ -2,7 +2,10 @@ import { defineConfig } from 'vite'
+ import react from '@vitejs/plugin-react'
+ 
+ // https://vite.dev/config/
++// VITE_BASE env variable controls the deployment base path:
++//   - GitHub Pages: '/webprog_final/'  (default, set in deploy.yml)
++//   - Vercel:       '/'                (set as env var in Vercel dashboard)
+ export default defineConfig({
+   plugins: [react()],
+-  base: '/',
++  base: process.env.VITE_BASE || '/webprog_final/',
+ })

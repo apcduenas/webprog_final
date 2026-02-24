@@ -1,0 +1,26 @@
+﻿095748cfb55989987b5034b03be9e094f906563c fix: dynamic base path for GitHub Pages vs Vercel deployment
+c5b9869974ebbc6364f4e8a361e972f1bf389c4e feat: Set up initial React portfolio application with Flask backend and deployment configurations.
+8e2d9c6a35fe87284ea26d21bd627b36b3c0c777 UPLOAD
+8f2faa9bbc2db9f545b06a6d7d831c9c0869c89a TEST
+4b60408334c7cd00b710acef38f6a4c3fac0e269 Last Update
+4b248ac88491c70773e4d66cec0e581a531071d9 UPDATE!!
+46b311cd636b073d72097a4445c8eba1c2cb7ffa UPDATE
+ecb2397b135838d210abf4fbcabfb670fce93839 LAST UPDATEEE!!!
+d0ba4ee8ec9b186f875f858f89b3a0fb330124e1 LAST UPDATE!!!
+37db371a24180b59a35e68fe7c742e4bbbaf84c4 Add Secrets
+539236833d8869d43a261a81bd6ee80c2d787649 HOPE LAST UPDATE
+74bfb8753295f70c49b2f9650999bf900ee07a59 UPDATE
+dc052c70a1a588300152ec60c4231dad6fd93662 UPDATES!!
+845111a0e9c72291327ca498b0ed141647916c13 UPDATEE!!!
+55b421e344012b0c536a8ce56d96b922c647b6e4 UPDATE!!
+1d467d31cbe68e1f3fc4ac15f890f52a494eea61 UPDATE
+25c166dbd90919f1ade1d657acbcaf8e18a2d0ee CONNECTED TO DATABASE
+f0858fa80a1f3aaa5cd45efba97f611f706dc9f0 TEST
+5eb001b3c23b4230d75ebe181208917b06942b99 Update
+14cf122eb9aea813dd0372e2b3039b63438d6f3c fix: adjust asset paths for base path /webprog_final/
+8b89b694d2a692749ab1c4a0680cb732a1777a52 fix: correct steps reference syntax
+c4cc6fd57206940e99afdcd8c8c1f341af373d93 fix: yaml syntax and use npm install
+182f9cb161dfbc77fee74aeb302ecf6fbeff0df6 fix: correct action name in deploy workflow
+7524fa98fe98391ef81b806dfac883124252c662 chore: setup github pages deployment for react portfolio
+6d6a2851920070f59ebb2d3fe28cedd124273f4a UPDATE
+c7672aafaaa2ebda22a70743f8edd5de71b1ad35 first commit
