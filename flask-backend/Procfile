@@ -1,0 +1,2 @@
+# Render will use gunicorn to serve the app
+web: gunicorn app:app

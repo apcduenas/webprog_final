@@ -4,8 +4,8 @@ const Hero = () => {
     return (
         <section id="home" className="hero">
             <div className="hero-content">
-                <h1>Hi, I'm <FlameText text="Anthony Duenas" className="highlight-text" /></h1>
-                <p>A second-year Information Technology student at Asia Pacific College. I'm passionate about web development and continuously improving my technical skills.</p>
+                <h1>Hi, I&apos;m <FlameText text="Anthony Duenas" className="highlight-text" /></h1>
+                <p>A second-year Information Technology student at Asia Pacific College. I&apos;m passionate about web development and continuously improving my technical skills.</p>
                 <a href="#projects" className="btn-primary" onClick={(e) => {
                     e.preventDefault();
                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });

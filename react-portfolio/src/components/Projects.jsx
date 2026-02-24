@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from '../supabase';
+import { useState, useEffect } from 'react';
 import FlameText from './FlameText';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -8,33 +9,27 @@ const Projects = () => {
 
     useEffect(() => {
         fetchProjects();
-
-        // Real-time subscription
-        const subscription = supabase
-            .channel('public:projects')
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => {
-                fetchProjects();
-            })
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(subscription);
-        };
     }, []);
 
     const fetchProjects = async () => {
         setLoading(true);
-        const { data, error } = await supabase
-            .from('projects')
-            .select('*')
-            .order('order', { ascending: true });
+        try {
+            const response = await fetch(`${API_URL}/api/projects`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-        if (error) {
-            console.error('Error fetching projects:', error);
-        } else {
-            setProjects(data || []);
+            if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+            const result = await response.json();
+            setProjects(result.data || []);
+        } catch (err) {
+            console.error('Error fetching projects:', err);
+            // Fallback: show static projects if API not available
+            setProjects([]);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -45,11 +40,24 @@ const Projects = () => {
                     {loading ? (
                         <p style={{ textAlign: 'center', width: '100%' }}>Loading projects...</p>
                     ) : projects.length === 0 ? (
-                        <div className="project-card">
-                            <i className="project-image fas fa-fire"></i>
-                            <h3>Portfolio Website</h3>
-                            <p>A Ghost Rider themed personal portfolio built with HTML, CSS, and React featuring custom animations and a unique fire cursor effect.</p>
-                        </div>
+                        // Static fallback cards if no projects in DB
+                        <>
+                            <div className="project-card">
+                                <i className="project-image fas fa-fire"></i>
+                                <h3>Portfolio Website</h3>
+                                <p>A Ghost Rider themed personal portfolio built with React featuring custom animations, fire cursor, and a REST API guestbook powered by Flask + Supabase.</p>
+                            </div>
+                            <div className="project-card">
+                                <i className="project-image fas fa-code"></i>
+                                <h3>Web Programming Projects</h3>
+                                <p>Various web development projects created during my BSIT studies at Asia Pacific College, focusing on modern web technologies.</p>
+                            </div>
+                            <div className="project-card">
+                                <i className="project-image fas fa-database"></i>
+                                <h3>Database Applications</h3>
+                                <p>Projects involving database design and integration, including Supabase-powered full-stack applications with REST API backends.</p>
+                            </div>
+                        </>
                     ) : (
                         projects.map((project) => (
                             <div key={project.id} className="project-card">

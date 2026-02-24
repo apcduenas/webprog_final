@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 /**
  * FlameText splits a string into individual characters and applies

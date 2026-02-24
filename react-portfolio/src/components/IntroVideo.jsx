@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const IntroVideo = ({ onComplete }) => {
     const [isVisible, setIsVisible] = useState(true);
     const containerRef = useRef(null);
     const videoRef = useRef(null);
 
-    const handleSkip = () => {
+    const handleSkip = useCallback(() => {
         if (containerRef.current) {
             containerRef.current.style.transition = 'opacity 0.8s ease-out';
             containerRef.current.style.opacity = '0';
@@ -14,7 +14,7 @@ const IntroVideo = ({ onComplete }) => {
                 onComplete();
             }, 800);
         }
-    };
+    }, [onComplete]);
 
     useEffect(() => {
         // Autoplay handling
@@ -22,7 +22,7 @@ const IntroVideo = ({ onComplete }) => {
             videoRef.current.play().catch(console.error);
         }
 
-        const handleKeyDown = (e) => {
+        const handleKeyDown = () => {
             handleSkip();
         };
 
@@ -37,7 +37,7 @@ const IntroVideo = ({ onComplete }) => {
             document.removeEventListener('keydown', handleKeyDown);
             clearTimeout(timeout);
         };
-    }, []);
+    }, [handleSkip]);
 
     if (!isVisible) return null;
 
@@ -68,7 +68,7 @@ const IntroVideo = ({ onComplete }) => {
                 }}
                 muted
                 playsInline
-                src={`${import.meta.env.BASE_URL}images/Intro.mp4`}
+                src="/images/Intro.mp4"
 
                 onEnded={handleSkip}
             />

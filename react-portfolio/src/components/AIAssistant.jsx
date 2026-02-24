@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './AIAssistant.css';
 
 const AIAssistant = ({ isOpen, setIsOpen }) => {
@@ -13,10 +13,8 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
+    const toggleChat = () => setIsOpen(!isOpen);
 
-    const toggleChat = () => {
-        setIsOpen(!isOpen);
-    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -217,7 +215,7 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
             <div className={`ai-chat-window ${isOpen ? 'visible' : ''}`}>
                 <div className="ai-header">
                     <div className="ai-avatar">
-                        <img src="/webprog_final/images/Picture1.jpg" alt="Anthony" />
+                        <img src="/images/Picture1.jpg" alt="Anthony" />
                     </div>
                     <div className="ai-info">
                         <h3>Anthony Duenas</h3>
@@ -271,7 +269,7 @@ const AIAssistant = ({ isOpen, setIsOpen }) => {
                 ) : (
                     <div className="ai-pill-content">
                         <div className="ai-pill-avatar">
-                            <img src="/webprog_final/images/Picture1.jpg" alt="Anthony" />
+                            <img src="/images/Picture1.jpg" alt="Anthony" />
                         </div>
                         <span className="online-indicator"></span>
                         <span className="ai-pill-text">Online, Chat with Anthony</span>

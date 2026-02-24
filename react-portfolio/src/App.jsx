@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,23 +9,18 @@ import ContactInfo from './components/ContactInfo';
 import Guestbook from './components/Guestbook';
 import Footer from './components/Footer';
 import FireCursor from './components/FireCursor';
-import IntroVideo from './components/IntroVideo';
 import ThemeTransition from './components/ThemeTransition';
 import AIAssistant from './components/AIAssistant';
 import './index.css'; // Ensure global styles are applied
 
 function App() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [showIntro, setShowIntro] = useState(true);
   const [transitionTheme, setTransitionTheme] = useState(null); // 'light' or 'dark' or null
 
   const [isAIChatOpen, setIsAIChatOpen] = useState(false);
 
-  // Initialize Theme from LocalStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-  }, []);
+
 
   // Update HTML class when theme changes
   useEffect(() => {
@@ -49,7 +44,14 @@ function App() {
       {/* Intro Video - Only shows on initial load if we want. 
            In the original code, it plays if the element exists. 
            We'll keep it as a one-time thing on mount. */}
-      {showIntro && <IntroVideo onComplete={() => setShowIntro(false)} />}
+      {showIntro && (
+        <ThemeTransition
+          videoSrc="/images/Intro.mp4"
+          fadeOut={true}
+          zIndex={9998}
+          onComplete={() => setShowIntro(false)}
+        />
+      )}
 
       {/* Theme Transition Video */}
       {transitionTheme && (

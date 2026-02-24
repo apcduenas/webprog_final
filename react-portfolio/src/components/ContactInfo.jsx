@@ -1,4 +1,3 @@
-import React from 'react';
 import FlameText from './FlameText';
 
 const ContactInfo = () => {

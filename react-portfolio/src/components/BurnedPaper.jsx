@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * A container component that simulates the look of a piece of paper
  * whose edges have been organically scorched by hellfire.

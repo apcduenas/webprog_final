@@ -1,0 +1,8 @@
+# Flask
+flask-backend/.env
+flask-backend/venv/
+flask-backend/__pycache__/
+flask-backend/*.pyc
+
+# General
+.DS_Store

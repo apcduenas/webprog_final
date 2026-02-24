@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FlameText from './FlameText';
 
 const Gallery = () => {
     const images = [
-        { src: `${import.meta.env.BASE_URL}images/Picture1.jpg`, alt: 'Picture 1' },
-        { src: `${import.meta.env.BASE_URL}images/Picture2.jpg`, alt: 'Picture 2' },
-        { src: `${import.meta.env.BASE_URL}images/Picture3.jpg`, alt: 'Picture 3' },
-        { src: `${import.meta.env.BASE_URL}images/Picture4.jpg`, alt: 'Picture 4' },
-        { src: `${import.meta.env.BASE_URL}images/Gallery6.jpg`, alt: 'Gallery 6' }
+        { src: '/images/Picture1.jpg', alt: 'Picture 1' },
+        { src: '/images/Picture2.jpg', alt: 'Picture 2' },
+        { src: '/images/Picture3.jpg', alt: 'Picture 3' },
+        { src: '/images/Picture4.jpg', alt: 'Picture 4' },
+        { src: '/images/Gallery6.jpg', alt: 'Gallery 6' }
     ];
 
 
