@@ -7,6 +7,6 @@ import react from '@vitejs/plugin-react'
 //   Vercel:       '/'              (set in Vercel env vars)
 export default defineConfig({
   plugins: [react()],
-  // Automatically detect Vercel environment (process.env.VERCEL is '1' on Vercel)
-  base: process.env.VERCEL ? '/' : (process.env.VITE_BASE || '/webprog_final/'),
+  // Automatically detect Vercel or Render environment
+  base: (process.env.VERCEL || process.env.RENDER) ? '/' : (process.env.VITE_BASE || '/webprog_final/'),
 })
