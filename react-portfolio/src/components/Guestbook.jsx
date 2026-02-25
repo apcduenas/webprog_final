@@ -11,9 +11,15 @@ const Guestbook = () => {
     });
     const [loading, setLoading] = useState(true);
     const [sending, setSending] = useState(false);
+    const [dbError, setDbError] = useState(!supabase);
 
     // Fetch messages on mount + real-time subscription
     useEffect(() => {
+        if (!supabase) {
+            setLoading(false);
+            return;
+        }
+
         fetchMessages();
 
         // Real-time subscription: new comments appear instantly
@@ -38,6 +44,7 @@ const Guestbook = () => {
 
         if (error) {
             console.error('Error fetching messages:', error);
+            setDbError(true);
         } else {
             setEntries(data || []);
         }
@@ -54,7 +61,7 @@ const Guestbook = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.name.trim() || !formData.comment.trim()) return;
+        if (!supabase || !formData.name.trim() || !formData.comment.trim()) return;
 
         setSending(true);
 
@@ -119,14 +126,18 @@ const Guestbook = () => {
                             Make this public
                         </label>
                     </div>
-                    <button type="submit" className="btn-primary" disabled={sending}>
+                    <button type="submit" className="btn-primary" disabled={sending || !supabase}>
                         {sending ? 'Sending...' : 'Comment'}
                     </button>
                 </form>
 
                 <div className="comments-wrapper">
                     <h3>Recent Messages</h3>
-                    {loading ? (
+                    {dbError ? (
+                        <p style={{ color: '#aaa', textAlign: 'center' }}>
+                            Comments unavailable. Database not configured.
+                        </p>
+                    ) : loading ? (
                         <p style={{ textAlign: 'center' }}>Loading comments...</p>
                     ) : entries.length === 0 ? (
                         <p style={{ textAlign: 'center' }}>No comments yet. Be the first one!</p>
