@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '../supabase';
 import FlameText from './FlameText';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
 
 const Guestbook = () => {
     const [entries, setEntries] = useState([]);
@@ -38,13 +37,18 @@ const Guestbook = () => {
 
     const fetchMessages = async () => {
         setLoading(true);
+        if (!supabase) {
+            setDbError(true);
+            setLoading(false);
+            return;
+        }
         const { data, error } = await supabase
             .from('messages')
             .select('*')
             .order('created_at', { ascending: false });
 
         if (error) {
-            console.error('Error fetching messages:', error);
+            console.error('Error fetching messages:', error.message);
             setDbError(true);
         } else {
             setEntries(data || []);
@@ -65,22 +69,23 @@ const Guestbook = () => {
         if (!formData.name.trim() || !formData.comment.trim()) return;
 
         setSending(true);
+        if (!supabase) return;
 
         try {
-            const response = await fetch(`${API_URL}/api/guestbook`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: formData.name,
-                    comment: formData.comment,
-                    isPublic: formData.isPublic
-                })
-            });
+            const { error } = await supabase
+                .from('messages')
+                .insert([
+                    {
+                        name: formData.name,
+                        comment: formData.comment,
+                        public: formData.isPublic
+                    }
+                ]);
 
-            if (!response.ok) throw new Error('Failed to send comment');
+            if (error) throw error;
 
             setFormData({ name: '', comment: '', isPublic: false });
-            fetchMessages();
+            // No need to call fetchMessages() manually because of real-time subscription
         } catch (error) {
             console.error('Error adding comment: ', error);
             alert('Failed to send comment. Please try again.');
