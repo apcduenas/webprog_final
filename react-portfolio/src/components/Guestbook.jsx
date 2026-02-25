@@ -68,6 +68,11 @@ const Guestbook = () => {
         e.preventDefault();
         if (!formData.name.trim() || !formData.comment.trim()) return;
 
+        if (!supabase) {
+            alert("Cannot connect to the database. Please check your configuration.");
+            return;
+        }
+
         setSending(true);
         if (!supabase) return;
 
@@ -132,7 +137,7 @@ const Guestbook = () => {
                             Make this public
                         </label>
                     </div>
-                    <button type="submit" className="btn-primary" disabled={sending}>
+                    <button type="submit" className="btn-primary" disabled={sending || !supabase}>
                         {sending ? 'Sending...' : 'Comment'}
                     </button>
                 </form>
