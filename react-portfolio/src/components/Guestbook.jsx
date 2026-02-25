@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../supabase';
 import FlameText from './FlameText';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
 
 const Guestbook = () => {
     const [entries, setEntries] = useState([]);
@@ -11,42 +12,24 @@ const Guestbook = () => {
     });
     const [loading, setLoading] = useState(true);
     const [sending, setSending] = useState(false);
-    const [dbError, setDbError] = useState(!supabase);
+    const [dbError, setDbError] = useState(false);
 
-    // Fetch messages on mount + real-time subscription
+    // Fetch messages on mount
     useEffect(() => {
-        if (!supabase) {
-            setLoading(false);
-            return;
-        }
-
         fetchMessages();
-
-        // Real-time subscription: new comments appear instantly
-        const subscription = supabase
-            .channel('public:messages')
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
-                setEntries(prev => [payload.new, ...prev]);
-            })
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(subscription);
-        };
     }, []);
 
     const fetchMessages = async () => {
         setLoading(true);
-        const { data, error } = await supabase
-            .from('messages')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-        if (error) {
+        try {
+            const response = await fetch(`${API_URL}/api/guestbook`);
+            if (!response.ok) throw new Error('Failed to fetch');
+            const result = await response.json();
+            setEntries(result.data || result || []);
+            setDbError(false);
+        } catch (error) {
             console.error('Error fetching messages:', error);
             setDbError(true);
-        } else {
-            setEntries(data || []);
         }
         setLoading(false);
     };
@@ -61,25 +44,25 @@ const Guestbook = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!supabase || !formData.name.trim() || !formData.comment.trim()) return;
+        if (!formData.name.trim() || !formData.comment.trim()) return;
 
         setSending(true);
 
         try {
-            const { error } = await supabase
-                .from('messages')
-                .insert([
-                    {
-                        name: formData.name,
-                        comment: formData.comment,
-                        public: formData.isPublic
-                    }
-                ]);
+            const response = await fetch(`${API_URL}/api/guestbook`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    comment: formData.comment,
+                    isPublic: formData.isPublic
+                })
+            });
 
-            if (error) throw error;
+            if (!response.ok) throw new Error('Failed to send comment');
 
             setFormData({ name: '', comment: '', isPublic: false });
-            // No alert — comment appears instantly via real-time subscription
+            fetchMessages(); // Refresh list manually
         } catch (error) {
             console.error('Error adding comment: ', error);
             alert('Failed to send comment. Please try again.');
@@ -126,7 +109,7 @@ const Guestbook = () => {
                             Make this public
                         </label>
                     </div>
-                    <button type="submit" className="btn-primary" disabled={sending || !supabase}>
+                    <button type="submit" className="btn-primary" disabled={sending}>
                         {sending ? 'Sending...' : 'Comment'}
                     </button>
                 </form>
